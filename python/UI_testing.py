@@ -6,7 +6,7 @@ from tkinter.messagebox import showerror
 rt = tkinter.Tk()
 
 try:
-    #geting screen size
+    #getting screen size
     sw = str(rt.winfo_screenwidth())
     sh = str(rt.winfo_screenheight())
     screen = sw + 'x' + sh
