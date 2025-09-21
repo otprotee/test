@@ -1,12 +1,19 @@
 import sqlite3
 import tkinter as tk
-import time
 
 #create tkinter window
 root = tk.Tk()
 root.geometry("400x500")
 root.title('CD Database')
 root.config(bg="black")
+
+#frame stuff
+frame = tk.Frame(root, bg='black')
+frame.pack(padx=10, pady=10, side=tk.BOTTOM)
+
+scrollbar = tk.Scrollbar(frame, bg='black')
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
 
 #item names
 def on_entry_click_artist(event):
@@ -97,6 +104,10 @@ def DeleteSubmit ():
 
 
 def SelectALL ():
+    listbox = tk.Listbox(frame, yscrollcommand=scrollbar.set, height=10, width=40, bg='black', fg='white')
+    listbox.pack(side=tk.BOTTOM, fill=tk.BOTH)
+    scrollbar.config(command=listbox.yview)
+
     all = '''SELECT * FROM CD'''
     cursor_obj.execute(all)
     output = cursor_obj.fetchall()
@@ -105,9 +116,10 @@ def SelectALL ():
 
     for row in output:
         everything = f"{row[0]} : {row[1]}"
-        everything_output += everything + '\n'
+        listbox.insert(tk.END, everything)
 
-    Select_label.config(text=everything_output)
+
+
 
 
 add_button = tk.Button(root, text="Add Album", command=AddToTable, )
