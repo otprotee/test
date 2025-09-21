@@ -1,6 +1,5 @@
 import sqlite3
 import tkinter as tk
-import time
 
 #create tkinter window
 root = tk.Tk()
